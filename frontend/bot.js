@@ -14,7 +14,7 @@
   // ══════════════════════════════════════════════════════════════
 
   var BOT_NAME   = 'Santa Fe Realty AI';
-  var BOT_INTRO  = 'Hola. Soy tu asistente inmobiliario de Santa Fe. Puedo ayudarte a detectar oportunidades, comparar torres, revisar precios, negociar mejor y analizar la unidad abierta.';
+  var BOT_INTRO  = 'Hola. Soy el asistente de inteligencia de Santa Fe CI. Puedo priorizar oportunidades, comparar torres, validar niveles de precio y preparar argumentos de negociación para decisiones ejecutivas.';
   var BOT_AVATAR_IMAGE = window.sfBotAvatarImage || './img/sf-bot-avatar.jpg';
 
   var STARTER_PROMPTS = [
@@ -826,7 +826,7 @@
     var fab = document.createElement('button');
     fab.id = 'sfBotFab';
     fab.className = 'sfre-fab';
-    fab.setAttribute('aria-label', 'Abrir asistente inmobiliario');
+    fab.setAttribute('aria-label', 'Abrir asistente de inteligencia inmobiliaria');
     fab.setAttribute('title', 'Santa Fe Realty AI');
     fab.innerHTML = '' +
       '<span class="sfre-fab-icon">' + houseIcon() + '</span>' +
@@ -861,7 +861,7 @@
         '<div class="sfre-messages" id="sfBotMessages" role="log" aria-live="polite"></div>' +
         '<div class="sfre-starters" id="sfBotStarters"></div>' +
         '<div class="sfre-input-row">' +
-          '<input type="text" id="sfBotInput" class="sfre-input" maxlength="320" placeholder="Pregunta sobre mercado, torres, precios o una unidad" autocomplete="off" aria-label="Pregunta al asistente" />' +
+          '<input type="text" id="sfBotInput" class="sfre-input" maxlength="320" placeholder="Consulta mercado, torres, precios o una unidad clave" autocomplete="off" aria-label="Pregunta al asistente" />' +
           '<button id="sfBotSendBtn" class="sfre-send-btn" aria-label="Enviar pregunta">' + sparkIcon() + '</button>' +
         '</div>' +
       '</div>';

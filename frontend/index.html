@@ -28,7 +28,7 @@
       <div class="pulse-left">
         <span class="pulse-dot pulse-live" aria-label="Live"></span>
         <span class="pulse-label">SF·CI</span>
-        <span class="data-status demo" id="dataStatusBadge">Cargando</span>
+        <span class="data-status demo" id="dataStatusBadge" aria-live="polite">Cargando</span>
         <span class="pulse-sep">·</span>
         <span id="pulseListings" class="pulse-stat">— listados</span>
         <span class="pulse-sep">·</span>
@@ -38,8 +38,8 @@
       </div>
       <div class="pulse-right">
         <span id="pulseTime" class="pulse-time pulse-mono"></span>
-        <span id="pulseHealth" class="pulse-time pulse-mono" title="Estado API">API: —</span>
-        <button class="pulse-refresh-btn" id="pulseRefreshBtn" title="Actualizar">
+        <span id="pulseHealth" class="pulse-time pulse-mono" title="Estado API" aria-live="polite">API: —</span>
+        <button class="pulse-refresh-btn" id="pulseRefreshBtn" type="button" title="Actualizar" aria-label="Actualizar estado del mercado">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
         </button>
       </div>
@@ -78,33 +78,33 @@
 
       <div class="header-right">
         <nav class="header-nav" aria-label="Navegación principal">
-          <button class="nav-btn" id="overviewNavBtn" data-view="overview" aria-current="page">
+          <button class="nav-btn" type="button" id="overviewNavBtn" data-view="overview" aria-current="page">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-            <span>Vista</span>
+            <span>Resumen</span>
           </button>
-          <button class="nav-btn" id="operatorNavBtn" data-view="operator">
+          <button class="nav-btn" type="button" id="operatorNavBtn" data-view="operator">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-            <span>Operador</span>
+            <span>Ejecución</span>
           </button>
-          <button class="nav-btn" id="compareBtn" data-view="compare">
+          <button class="nav-btn" type="button" id="compareBtn" data-view="compare">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
             <span>Comparar</span>
           </button>
-          <button class="nav-btn" id="agentsBtn" data-view="agents">
+          <button class="nav-btn" type="button" id="agentsBtn" data-view="agents">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             <span>Agentes</span>
           </button>
-          <button class="nav-btn" id="dashboardBtn" data-view="dashboard">
+          <button class="nav-btn" type="button" id="dashboardBtn" data-view="dashboard">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="8" height="8" rx="1"/><rect x="14" y="3" width="8" height="8" rx="1"/><rect x="2" y="13" width="8" height="8" rx="1"/><path d="M14 17h8M18 13v8"/></svg>
             <span>Dashboard</span>
           </button>
-          <button class="nav-btn" id="mapNavBtn" data-view="map">
+          <button class="nav-btn" type="button" id="mapNavBtn" data-view="map">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
             <span>Mapa</span>
           </button>
-          <button class="nav-btn" id="trackingNavBtn" data-view="tracking">
+          <button class="nav-btn" type="button" id="trackingNavBtn" data-view="tracking">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-            <span>Fuentes</span>
+            <span>Monitoreo</span>
             <span class="nav-alert-dot" id="trackingAlertDot" style="display:none;"></span>
           </button>
         </nav>
@@ -113,7 +113,7 @@
           <!-- Bot: ask AI button in header -->
           <button class="sf-bot-header-btn" id="sfBotHeaderBtn" title="Asistente SF·CI — pregunta sobre los datos (⌘/)" aria-label="Abrir asistente de inteligencia" onclick="sfBotOpen && sfBotOpen()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            Preguntar
+            Consultar
           </button>
           <!-- Blueprint merge: guided mode help button -->
           <button class="help-btn" id="guidedModeBtn" title="Modo guiado — cómo usar la plataforma" aria-label="Abrir guía de uso">
@@ -155,36 +155,36 @@
             <span>Santa Fe CI · Abril 2026</span>
           </div>
           <div class="overview-hero-content">
-            <div class="overview-hero-title">Intelligence Layer</div>
-            <div class="overview-hero-sub">Santa Fe · CDMX · Arrendamiento de alto valor &middot; Península &middot; Torre 300 &middot; Paradox</div>
+            <div class="overview-hero-title">Plataforma de inteligencia inmobiliaria</div>
+            <div class="overview-hero-sub">Santa Fe · CDMX · Inteligencia ejecutiva para arrendamiento premium &middot; Península &middot; Torre 300 &middot; Paradox</div>
           </div>
         </div>
 
         <!-- Page title + filter row -->
         <div class="view-header">
           <div class="view-title-block">
-            <h1>Intelligence Layer — Decisión de Arrendamiento, Santa Fe</h1>
+            <h1>Centro de decisión de arrendamiento — Santa Fe</h1>
             <p class="subtitle" id="overviewSubtitle">Cargando listados…</p>
           </div>
           <div class="filter-row" role="group" aria-label="Filtrar listados">
-            <button class="filter-chip active" data-filter="all">Todos</button>
-            <button class="filter-chip" data-filter="peninsula">Península</button>
-            <button class="filter-chip" data-filter="torre300">Torre 300</button>
-            <button class="filter-chip" data-filter="paradox">Paradox</button>
+            <button class="filter-chip active" type="button" data-filter="all">Todos</button>
+            <button class="filter-chip" type="button" data-filter="peninsula">Península</button>
+            <button class="filter-chip" type="button" data-filter="torre300">Torre 300</button>
+            <button class="filter-chip" type="button" data-filter="paradox">Paradox</button>
             <div class="filter-sep"></div>
-            <button class="filter-chip" data-filter="negotiate">
+            <button class="filter-chip" type="button" data-filter="negotiate">
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8z"/></svg>
               Negociar
             </button>
-            <button class="filter-chip" data-filter="1bed">1 Rec</button>
-            <button class="filter-chip" data-filter="2bed">2 Rec</button>
-            <button class="filter-chip" data-filter="3bed">3+ Rec</button>
+            <button class="filter-chip" type="button" data-filter="1bed">1 Rec</button>
+            <button class="filter-chip" type="button" data-filter="2bed">2 Rec</button>
+            <button class="filter-chip" type="button" data-filter="3bed">3+ Rec</button>
           </div>
         </div>
 
         <!-- Blueprint merge: decision engine banner + advanced filters collapse -->
         <div class="decision-engine-banner" id="decisionEngineBanner">
-          <span class="decision-engine-eyebrow">Operating view — Motor de decisión</span>
+          <span class="decision-engine-eyebrow">Vista operativa — Motor de decisión</span>
           <div class="decision-engine-sep"></div>
           <span class="decision-engine-summary" id="decisionEngineSummary">Cargando inteligencia de mercado&hellip;</span>
           <button class="decision-engine-cta" id="decisionEngineGuideBtn">
@@ -314,7 +314,7 @@
 
         <!-- Listings section header -->
         <div class="listings-section-header">
-          <span class="listings-section-title">Listados</span>
+          <span class="listings-section-title">Inventario activo</span>
           <span class="listings-count" id="listingsCount"></span>
           <div class="sort-controls">
             <label class="sort-label" for="sortSelect">Ordenar:</label>
@@ -389,13 +389,13 @@
         <div class="negotiation-decision-banner">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" color="var(--color-success)"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
           <div class="decision-banner-text">
-            <div class="decision-banner-label" style="color:var(--color-success)">Negotiation workbench — Lista de acción</div>
+            <div class="decision-banner-label decision-banner-label-success">Mesa de negociación — Lista de acción priorizada</div>
             <div class="decision-banner-desc">Unidades ordenadas por score de acción. “Negociar” = oportunidad verificada con banda de oferta, opening anchor y battle card listos. Actúa en las unidades críticas de hoy.</div>
           </div>
         </div>
         <div class="view-header">
           <div class="view-title-block">
-            <h1>Negotiation Workbench — Hoy</h1>
+            <h1>Mesa de negociación — Prioridades de hoy</h1>
             <p class="subtitle" id="operatorSubtitle">Argumentos, banda operativa y guión de cierre · Ordenado por score de acción · Opening anchor y battle card incluidos</p>
           </div>
         </div>
@@ -627,15 +627,15 @@
             <div class="map-top-left">
               <!-- Layer toggle -->
               <div class="map-layer-toggle" role="group" aria-label="Capa base">
-                <button class="map-layer-btn active" data-layer="dark" title="Vista oscura">
+                <button class="map-layer-btn active" type="button" data-layer="dark" title="Vista oscura">
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/></svg>
                   Oscuro
                 </button>
-                <button class="map-layer-btn" data-layer="satellite" title="Vista satélite">
+                <button class="map-layer-btn" type="button" data-layer="satellite" title="Vista satélite">
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
                   Satélite
                 </button>
-                <button class="map-layer-btn" data-layer="streets" title="Vista calles">
+                <button class="map-layer-btn" type="button" data-layer="streets" title="Vista calles">
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
                   Calles
                 </button>
@@ -643,10 +643,10 @@
 
               <!-- Building filter on map -->
               <div class="map-layer-toggle" role="group" aria-label="Filtrar edificios">
-                <button class="map-layer-btn active" data-map-filter="all">Todos</button>
-                <button class="map-layer-btn" data-map-filter="peninsula" style="color:var(--building-peninsula)">Península</button>
-                <button class="map-layer-btn" data-map-filter="torre300" style="color:var(--building-torre300)">Torre 300</button>
-                <button class="map-layer-btn" data-map-filter="paradox" style="color:var(--building-paradox)">Paradox</button>
+                <button class="map-layer-btn active" type="button" data-map-filter="all">Todos</button>
+                <button class="map-layer-btn" type="button" data-map-filter="peninsula">Península</button>
+                <button class="map-layer-btn" type="button" data-map-filter="torre300">Torre 300</button>
+                <button class="map-layer-btn" type="button" data-map-filter="paradox">Paradox</button>
               </div>
             </div>
 
@@ -655,7 +655,7 @@
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                 Centrar
               </button>
-              <span class="map-control-btn" id="mapListingCount" style="cursor:default;">— listados</span>
+              <span class="map-control-btn map-control-btn-static" id="mapListingCount">— listados</span>
             </div>
           </div>
 
@@ -706,7 +706,7 @@
         </div>
       </div>
       <!-- Footer meta -->
-      <span class="pulse-mono" style="flex-shrink:0;white-space:nowrap;">
+      <span class="pulse-mono footer-cache-status">
         <span id="cacheStatusFooter"></span>
       </span>
     </footer>
