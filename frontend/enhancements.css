@@ -1052,3 +1052,141 @@ button:not([disabled]) {
   gap: var(--space-3);
   align-items: flex-start;
 }
+
+/* ── 21. Executive spacing + resilient states (final polish pass) ───── */
+.app-header {
+  gap: var(--space-5);
+  padding: var(--space-3) var(--space-6);
+}
+
+.header-center {
+  max-width: 520px;
+}
+
+.header-nav {
+  gap: 4px;
+  padding: 4px;
+}
+
+.nav-btn {
+  min-height: 32px;
+  padding-inline: var(--space-3);
+}
+
+.nav-btn:focus-visible,
+.icon-btn:focus-visible,
+.filter-chip:focus-visible,
+.map-layer-btn:focus-visible,
+.sf-bot-header-btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.overview-hero {
+  margin-bottom: var(--space-5);
+}
+
+.kpi-strip,
+.buildings-strip,
+.listings-grid {
+  gap: var(--space-4);
+}
+
+.listings-grid {
+  grid-template-columns: repeat(auto-fill, minmax(328px, 1fr));
+}
+
+.listing-card {
+  border-color: var(--color-border);
+}
+
+.listings-section-header {
+  margin-bottom: var(--space-4);
+}
+
+.operating-context-strip {
+  box-shadow: var(--shadow-xs);
+}
+
+.sf-bot-panel {
+  border: 1px solid var(--color-divider);
+}
+
+.sf-bot-header-sub {
+  letter-spacing: 0.06em;
+}
+
+.app-footer {
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.footer-cache-status {
+  flex-shrink: 0;
+  white-space: nowrap;
+  opacity: 0.85;
+}
+
+.decision-banner-label-success {
+  color: var(--color-success);
+}
+
+.map-layer-btn[data-map-filter="peninsula"] { color: var(--building-peninsula); }
+.map-layer-btn[data-map-filter="torre300"] { color: var(--building-torre300); }
+.map-layer-btn[data-map-filter="paradox"] { color: var(--building-paradox); }
+.map-control-btn-static { cursor: default; }
+
+.pulse-time.freshness-indicator.offline {
+  background: color-mix(in srgb, var(--color-error) 14%, transparent);
+  color: var(--color-error);
+  border: 1px solid var(--color-error-border);
+  border-radius: var(--radius-sm);
+  padding: 1px 6px;
+  font-weight: 600;
+  opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .app-header {
+    gap: var(--space-3);
+    padding-inline: var(--space-4);
+  }
+
+  .header-right {
+    gap: var(--space-2);
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .header-actions {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .header-nav {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .nav-btn {
+    flex: 1;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .overview-hero {
+    height: 236px;
+  }
+
+  .listings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .app-footer {
+    justify-content: center;
+  }
+}
