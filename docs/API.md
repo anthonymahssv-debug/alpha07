@@ -24,3 +24,4 @@ Compatibility endpoints used by existing `app.js`:
 - `GET /api/event-log`
 - `GET /api/snapshots`
 - `POST /api/collect`
+- `POST /api/images/extract`

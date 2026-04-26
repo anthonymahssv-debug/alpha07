@@ -20,6 +20,21 @@ def test_core_endpoints():
         assert response.status_code == 200, path
 
 
+def test_images_extract_endpoint():
+    response = client.post(
+        '/api/images/extract',
+        json={
+            'html': '<html><body><img src="https://cdn.example.com/a.jpg"><img src="/b.png"></body></html>',
+            'pageUrl': 'https://example.com/listing/123',
+        },
+    )
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload['count'] == 2
+    assert 'https://cdn.example.com/a.jpg' in payload['items']
+    assert 'https://example.com/b.png' in payload['items']
+
+
 def test_feed_shape():
     data = client.get('/api/feed').json()
     assert 'buildings' in data

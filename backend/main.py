@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import time
+import re
 from pathlib import Path
 from typing import Any, Dict
+from urllib.parse import urljoin
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -195,6 +197,53 @@ def refresh_alerts():
     save_alerts(alerts)
     return alerts
 
+
+IMAGE_EXTENSIONS = (".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif", ".bmp", ".svg")
+
+
+def _is_image_url(value: str) -> bool:
+    lower = value.lower().split("?", 1)[0].split("#", 1)[0]
+    return lower.startswith(("http://", "https://", "//")) and lower.endswith(IMAGE_EXTENSIONS)
+
+
+def _collect_image_urls(value: Any) -> list[str]:
+    found: list[str] = []
+    if isinstance(value, dict):
+        for key, item in value.items():
+            key_lower = str(key).lower()
+            if isinstance(item, str) and ("image" in key_lower or "photo" in key_lower or "img" in key_lower):
+                found.append(item)
+            found.extend(_collect_image_urls(item))
+    elif isinstance(value, list):
+        for item in value:
+            found.extend(_collect_image_urls(item))
+    elif isinstance(value, str) and _is_image_url(value):
+        found.append(value)
+    return found
+
+
+def _extract_images_from_html(html: str) -> list[str]:
+    urls: list[str] = []
+    for match in re.findall(r"""<img[^>]+src=['"]([^'"]+)['"]""", html, re.IGNORECASE):
+        urls.append(match.strip())
+    for srcset in re.findall(r"""srcset=['"]([^'"]+)['"]""", html, re.IGNORECASE):
+        for candidate in srcset.split(","):
+            part = candidate.strip().split(" ", 1)[0]
+            if part:
+                urls.append(part)
+    return urls
+
+
+def _normalize_image_url(url: str, page_url: str | None = None) -> str:
+    raw = (url or "").strip()
+    if not raw:
+        return ""
+    if raw.startswith("//"):
+        return f"https:{raw}"
+    if page_url and raw.startswith("/"):
+        return urljoin(page_url, raw)
+    return raw
+
 @app.get("/api/health")
 def health():
     ah = api_health()
@@ -338,6 +387,40 @@ async def inquiries(request: Request):
     except Exception:
         payload = {}
     return {"ok": True, "received": payload, "note": "Inquiry accepted by API hotfix shim."}
+
+
+@app.post("/api/images/extract")
+async def images_extract(request: Request):
+    try:
+        body = await request.json()
+    except Exception:
+        body = {}
+
+    listing_id = body.get("listingId")
+    html = body.get("html") or ""
+    page_url = body.get("pageUrl") or body.get("sourceUrl")
+    image_candidates: list[str] = []
+
+    if listing_id:
+        feed = load_feed() or seed_from_json()
+        listing = next((l for l in feed.get("listings", []) if l.get("id") == listing_id), None)
+        if not listing:
+            raise HTTPException(status_code=404, detail="Listing not found")
+        page_url = page_url or listing.get("source")
+        image_candidates.extend(_collect_image_urls(listing))
+
+    if html:
+        image_candidates.extend(_extract_images_from_html(html))
+
+    items: list[str] = []
+    seen: set[str] = set()
+    for candidate in image_candidates:
+        normalized = _normalize_image_url(candidate, page_url)
+        if normalized and normalized not in seen:
+            seen.add(normalized)
+            items.append(normalized)
+
+    return {"items": items, "count": len(items), "listingId": listing_id, "pageUrl": page_url}
 
 @app.post("/api/economics/occupancy-cost")
 async def occupancy_cost(request: Request):
